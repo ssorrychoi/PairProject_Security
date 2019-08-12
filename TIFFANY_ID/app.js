@@ -6,6 +6,7 @@ var logger = require('morgan');
 const formidable = require('formidable');
 var fs = require('fs');
 const sequelize = require('./models').sequelize;
+require('dotenv').config(); 
 
 var app = express();
 sequelize.sync();
