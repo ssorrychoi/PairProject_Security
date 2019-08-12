@@ -42,6 +42,7 @@ app.use('/logout', require('./routes/logout'));
 app.use('/photo_insert', require('./routes/photo_insert'));
 app.use('/modify', require('./routes/modify'));
 app.use('/member_delete', require('./routes/member_delete'));
+app.use('/recert',require('./routes/recert'));
 
 
 app.post('/upload', function (req, res) {    

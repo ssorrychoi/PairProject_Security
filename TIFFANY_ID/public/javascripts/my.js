@@ -154,23 +154,29 @@ $(document).ready(function () {
 
     $("#modify_submit_btn").click(function () {
         const password = $("#m_password").val();
+        const new_password = $("#new_password_confirm").val();
         const name = $("#m_name").val();
         const phone = $("#m_phone").val();
         const email = $("#m_email").val();
         const address = $("#m_address").val();
         const send_params = {
             password,
+            new_password,
             name,
             phone,
             email,
             address
         };
-
-        $.post('/modify', send_params, function (data, status) {
-            const parsed_data = JSON.parse(data);
-
-            window.location.assign("/");
-        });//post
+        if(password && new_password==password){
+            $.post('/modify', send_params, function (data, status) {
+                const parsed_data = JSON.parse(data);
+    
+                window.location.assign("/");
+            });//post
+        }else{
+            alert("새로운 비밀번호를 입력해주세요!");
+        }
+        
     });//modify_submit_btn
 
     let withdrawYn1 = false;
@@ -198,5 +204,31 @@ $(document).ready(function () {
         } else {
             window.location.href = "/#modify";
         }
+    });
+
+    $("#recert1").click(function () {
+        $.get('/recert?nm=recert1',function (data, status) {
+            window.location.assign('/#recert');
+        });
+    });
+
+    $("#recert2").click(function () {
+        $.get('/recert?nm=recert2',function (data, status) {
+            window.location.assign('/#recert');
+        });
+    });
+
+    $("#recertPwBtn").click(function () {
+        const recertPw = $("#recertPw").val();
+        const send_params = {
+            recertPw,
+        };
+
+        $.post("/recert", send_params, function (data, status) {
+            // alert(JSON.parse(data).msg);
+
+            window.location.assign("/#modify");
+            // window.location.assign("/#id_update");
+        });
     });
 });
